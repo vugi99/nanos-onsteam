@@ -1,6 +1,6 @@
 # nanos-onsteam
 
-## WARNING : Untested on linux (Tell me if it works)
+### Works on Windows and Linux
 
 ### You have to configure in the Config.lua : 
 * STEAMCMD_PATH : path to steamcmd (relative to server folder)

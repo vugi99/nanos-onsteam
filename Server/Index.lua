@@ -63,7 +63,7 @@ function IsUpdateAvailable()
         end
         --print("buildid", buildid, "branch", branch)
         if buildid then
-            local info_request = io.popen(STEAMCMD_PATH .. ' +login anonymous +app_info_update 1 +app_info_print 1686460 +quit"')
+            local info_request = io.popen(STEAMCMD_PATH .. ' +login anonymous +app_info_update 1 +app_info_print 1686460 +quit')
             local app_info = info_request:read("*a")
             io.close(info_request)
 
