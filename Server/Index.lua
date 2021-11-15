@@ -121,15 +121,20 @@ function UpdateServer(branch)
     local update_server_log = update_server:read("*a")
     io.close(update_server)
     local success = false
+    local failed_up_to_date = false
     for i, v in ipairs(split_str(update_server_log, "\n")) do
         --print(v)
-        if (v == "Success! App '1686460' fully installed." or v == "Success! App '1686460' already up to date.") then
+        if v == "Success! App '1686460' fully installed." then
             success = true
+        elseif v == "Success! App '1686460' already up to date." then
+            failed_up_to_date = true
         end
     end
     if success then
         Package.Log("nanos-onsteam : Server Updated, stopping the server")
         Server.Stop()
+    elseif failed_up_to_date then
+        Package.Warn("nanos-onsteam : Can't update server (Retry later)")
     else
         Package.Error("nanos-onsteam : server update failed (or can't check success of the update)")
     end
