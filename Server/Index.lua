@@ -97,7 +97,7 @@ function IsUpdateAvailable()
                     Package.Warn("Nanos server (branch: ".. branch .. ") update available\n Current build : " .. tostring(buildid) .. "\n Latest build : " .. tostring(latest_build_for_branch))
                     return true, branch
                 else
-                    Package.Log("Nanos server (branch: ".. branch .. ") up to date.")
+                    Package.Log("Nanos server (branch: ".. branch .. ", build: " .. tostring(buildid) .. ") up to date.")
                 end
             else
                 Package.Error("nanos-onsteam : latest_build_for_branch not found")
