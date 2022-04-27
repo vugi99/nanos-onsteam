@@ -44,7 +44,7 @@ end
 
 function IsUpdateAvailable()
     Package.Log("nanos-onsteam : Checking for nanos server updates")
-    local manifest_file = io.open("steamapps/appmanifest_1686460.acf", "r")
+    local manifest_file = io.open("steamapps/appmanifest_" .. NANOS_APPID .. ".acf", "r")
     if manifest_file then
         local manifest_file_content = manifest_file:read("*a")
         io.close(manifest_file)
@@ -63,7 +63,7 @@ function IsUpdateAvailable()
         end
         --print("buildid", buildid, "branch", branch)
         if buildid then
-            local info_request = io.popen(STEAMCMD_PATH .. ' +login anonymous +app_info_update 1 +app_info_print 1686460 +quit')
+            local info_request = io.popen(STEAMCMD_PATH .. ' +login anonymous +app_info_update 1 +app_info_print ' .. NANOS_APPID .. ' +quit')
             local app_info = info_request:read("*a")
             io.close(info_request)
 
@@ -106,16 +106,16 @@ function IsUpdateAvailable()
             Package.Error("nanos-onsteam : buildid not found")
         end
     else
-        Package.Error("nanos-onsteam : steamapps/appmanifest_1686460.acf invalid")
+        Package.Error("nanos-onsteam : steamapps/appmanifest_" .. NANOS_APPID .. ".acf invalid")
     end
     return false
 end
 
 function UpdateServer(branch)
     Package.Log("nanos-onsteam : Updating server")
-    local run_str = STEAMCMD_PATH .. " +login anonymous +force_install_dir " .. SERVER_PATH .. " +app_update 1686460 +quit"
+    local run_str = STEAMCMD_PATH .. " +login anonymous +force_install_dir " .. SERVER_PATH .. " +app_update " .. NANOS_APPID .. " +quit"
     if branch ~= "public" then
-        run_str = STEAMCMD_PATH .. " +login anonymous +force_install_dir " .. SERVER_PATH .. ' "+app_update 1686460 -beta ' .. branch .. '" +quit'
+        run_str = STEAMCMD_PATH .. " +login anonymous +force_install_dir " .. SERVER_PATH .. ' "+app_update ' .. NANOS_APPID .. ' -beta ' .. branch .. '" +quit'
     end
     local update_server = io.popen(run_str)
     local update_server_log = update_server:read("*a")
@@ -124,9 +124,9 @@ function UpdateServer(branch)
     local failed_up_to_date = false
     for i, v in ipairs(split_str(update_server_log, "\n")) do
         --print(v)
-        if v == "Success! App '1686460' fully installed." then
+        if v == "Success! App '" .. NANOS_APPID .. "' fully installed." then
             success = true
-        elseif v == "Success! App '1686460' already up to date." then
+        elseif v == "Success! App '" .. NANOS_APPID .. "' already up to date." then
             failed_up_to_date = true
         end
     end
