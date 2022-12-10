@@ -56,7 +56,7 @@ function IsUpdateAvailable()
             for i2, v2 in ipairs(manifest_line_wo_spaces) do
                 if v2 == "buildid" then
                     buildid = tonumber(manifest_line_wo_spaces[i2 + 2])
-                elseif v2 == "betakey" then
+                elseif v2 == "BetaKey" then
                     branch = manifest_line_wo_spaces[i2 + 2]
                 end
             end

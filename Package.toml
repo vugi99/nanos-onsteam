@@ -1,24 +1,30 @@
 # package configurations
 [package]
     # package name
-    name =                 "nanos-onsteam"
+    name =                  "nanos-onsteam"
     # contributors
-    author =               "Voltaism"
+    author =                "Voltaism"
     # version
-    version =              "0.1.4"
+    version =               "0.1.5"
     # image URL
-    image =                ""
-    # package type: 'script' (normal package), 'game-mode' (unique package - can only load one at a time) or 'loading-screen' (special package loaded in loading screen)
-    type =                 "script"
-    # whether to force the custom map Script to do not load
-    force_no_map_script =  false
+    image =                 ""
+    # package type: 'script' (normal package), 'game-mode' (unique package - can only load one at a time), 'library' (doesn't start a Lua VM) or 'loading-screen' (special package for loading screen)
+    type =                  "script"
+    # whether to force the custom map script to do not load
+    force_no_map_script =   false
     # auto destroy all entities spawned by this package when it unloads
-    auto_cleanup =         true
+    auto_cleanup =          true
+    # the game version (major.minor) at the time this package was created, for granting compatibility between breaking changes
+    compatibility_version = "1.24"
     # packages requirements
     packages_requirements = [
         
     ]
     # asset packs requirements
     assets_requirements = [
+        
+    ]
+    # compatible maps - maps to be highlighted when starting a new game through main menu
+    compatible_maps = [
         
     ]
